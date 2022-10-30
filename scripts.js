@@ -2,6 +2,7 @@ const operators = ['+', '-', 'x', '/'];
 let memory = [];
 let display = document.getElementById('screen');
 let calculatedNumber = 0;
+let equalSign = false;
 display.textContent = memory;
 
 function add(a, b) {
@@ -46,15 +47,16 @@ function truncate(number) {
 
 function addDisplay(buttonSelected) {
     if (operators.includes(buttonSelected)) {
+        equalSign = false;
         if (operators.includes(memory[memory.length - 1])) {
             memory[memory.length - 1] = buttonSelected;
         }
         else {
             if (memory.length > 2) {
                 calculatedNumber = operate(+memory[memory.length - 3], memory[memory.length - 2], +memory[memory.length - 1]);
-                calculatedNumber = truncate(calculatedNumber);
                 memory.push(calculatedNumber);
                 memory.push(buttonSelected);
+                calculatedNumber = truncate(calculatedNumber);
                 display.textContent = calculatedNumber;
             }
             else {
@@ -68,8 +70,16 @@ function addDisplay(buttonSelected) {
             display.textContent = memory[memory.length - 1];
         }
         else {
-            if (display.textContent.length < 9) {
-                memory[memory.length - 1] += buttonSelected; 
+            if (!equalSign) {
+                if (display.textContent.length < 9) {
+                    memory[memory.length - 1] += buttonSelected; 
+                    display.textContent = memory[memory.length - 1];
+                }
+            }
+            else {
+                equalSign = false;
+                memory = [];
+                memory.push(buttonSelected);
                 display.textContent = memory[memory.length - 1];
             }
         }
@@ -90,6 +100,7 @@ buttons.forEach(button => {
                 memory.push(calculatedNumber);
                 calculatedNumber = truncate(calculatedNumber);
                 display.textContent = calculatedNumber;
+                equalSign = true;
             }
             else if (memory.length > 2) {
                 calculatedNumber = operate(+memory[memory.length - 3], memory[memory.length - 2], +memory[memory.length - 1]);
@@ -97,6 +108,7 @@ buttons.forEach(button => {
                 memory.push(calculatedNumber);
                 calculatedNumber = truncate(calculatedNumber);
                 display.textContent = calculatedNumber;
+                equalSign = true;
             }
         }
         else {

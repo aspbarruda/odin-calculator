@@ -4,7 +4,7 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow: auto;
 }
 
 h1 {
@@ -19,7 +19,6 @@ header {
 }
 
 main {
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
