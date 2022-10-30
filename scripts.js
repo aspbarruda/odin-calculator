@@ -62,10 +62,15 @@ function addDisplay(buttonSelected) {
         else {
             if (memory.length > 2) {
                 calculatedNumber = operate(+memory[memory.length - 3], memory[memory.length - 2], +memory[memory.length - 1]);
-                memory.push(calculatedNumber);
-                memory.push(buttonSelected);
-                calculatedNumber = truncate(calculatedNumber);
-                display.textContent = calculatedNumber;
+                if (calculatedNumber === NaN || calculatedNumber === Infinity || calculatedNumber === -Infinity || calculatedNumber === undefined) {
+                    display.textContent = 'ERROR';
+                }
+                else {
+                    memory.push(calculatedNumber);
+                    memory.push(buttonSelected);
+                    calculatedNumber = truncate(calculatedNumber);
+                    display.textContent = calculatedNumber;
+                }
             }
             else {
                 memory.push(buttonSelected);
@@ -104,18 +109,28 @@ buttons.forEach(button => {
         else if (e.target.id === '=') {
             if (operators.includes(memory[memory.length - 1])) {
                 calculatedNumber = operate(+memory[memory.length - 2], memory[memory.length - 1], +memory[memory.length - 2]);
-                memory = [];
-                memory.push(calculatedNumber);
-                calculatedNumber = truncate(calculatedNumber);
-                display.textContent = calculatedNumber;
+                if (calculatedNumber === NaN || calculatedNumber === Infinity || calculatedNumber === -Infinity || calculatedNumber === undefined) {
+                    display.textContent = 'ERROR';
+                }
+                else {
+                    memory = [];
+                    memory.push(calculatedNumber);
+                    calculatedNumber = truncate(calculatedNumber);
+                    display.textContent = calculatedNumber;
+                }
                 equalSign = true;
             }
             else if (memory.length > 2) {
                 calculatedNumber = operate(+memory[memory.length - 3], memory[memory.length - 2], +memory[memory.length - 1]);
-                memory = [];
-                memory.push(calculatedNumber);
-                calculatedNumber = truncate(calculatedNumber);
-                display.textContent = calculatedNumber;
+                if (calculatedNumber == NaN || calculatedNumber == Infinity || calculatedNumber == -Infinity || calculatedNumber == undefined) {
+                    display.textContent = 'ERROR';
+                }
+                else {
+                    memory = [];
+                    memory.push(calculatedNumber);
+                    calculatedNumber = truncate(calculatedNumber);
+                    display.textContent = calculatedNumber;
+                }
                 equalSign = true;
             }
         }
