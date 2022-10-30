@@ -40,9 +40,17 @@ function clearDisplay() {
 }
 
 function truncate(number) {
-    let string = number.toString();
-    if (string.length > 9) return +string.slice(0, 9);
-    else return string;
+    if (number < 1000000000) {        
+        let string = number.toString();
+        if (string.length > 9) return +string.slice(0, 9);
+        else return string;
+    }
+    else {
+        let string = number.toExponential().toString().split('e');
+        string[0] = string[0].slice(0, 9 - string[1].length - 1);
+        string = string.join('e');
+        return (+string).toExponential();
+    }
 }
 
 function addDisplay(buttonSelected) {
