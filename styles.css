@@ -4,6 +4,7 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    overflow: scroll;
 }
 
 h1 {
@@ -11,6 +12,10 @@ h1 {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 90px;
     margin-bottom: 0;
+}
+
+header {
+    margin-bottom: 15px;
 }
 
 main {
@@ -23,14 +28,21 @@ main {
 #calculator {
     border: 5px solid dodgerblue;
     border-radius: 10px;
-    padding: 30px 15px;
+    padding: 40px 30px;
     display: flex;
     flex-direction: column;
 }
 
 #screen {
     border: 2px solid black;
-    min-height: 75px;
+    min-height: 115px;
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    font-size: 100px;
+    font-weight: bold;
+    padding-right: 10px;
 }
 
 #buttons {
