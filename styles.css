@@ -12,6 +12,7 @@ h1 {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 90px;
     margin-bottom: 0;
+    margin-top: 5px;
 }
 
 header {
@@ -25,11 +26,12 @@ main {
 }
 
 #calculator {
-    border: 5px solid dodgerblue;
+    border: 5px solid #C0C0C0;
     border-radius: 10px;
     padding: 40px 30px;
     display: flex;
     flex-direction: column;
+    background-color: #CECECF;
 }
 
 #screen {
@@ -57,10 +59,22 @@ main {
 button {
     background-color: white;
     font-size: 80px;
-    color: cornflowerblue;
+    color: white;
     background-color: darkblue;
     border: none;
     border-radius: 5px;
     min-width: 100px;
     margin: 30px 10px 10px;
+}
+
+.numbers {
+    background-color: #292B28;
+}
+
+.operators {
+    background-color: #837E6A;
+}
+
+#clear {
+    background-color: #FE3B4B;
 }
