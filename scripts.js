@@ -162,6 +162,30 @@ function specialButton (buttonSelected) {
             display.textContent = temp;
         }
     }
+    else {
+        if (!operators.includes(memory[memory.length - 1])) {
+            memory[memory.length - 1] = Math.sqrt(memory[memory.length - 1]);
+            if (memory[memory.length - 1].toString() == 'NaN') {
+                display.textContent = 'ERROR';
+                memory = [];
+            }
+            else {
+                let temp = truncate(memory[memory.length - 1])
+                display.textContent = temp;
+            }
+        }
+        else {
+            memory[memory.length - 2] = Math.sqrt(memory[memory.length - 2]);
+            if (memory[memory.length - 1].toString() == 'NaN') {
+                display.textContent = 'ERROR';
+                memory = [];
+            }
+            else {
+            let temp = truncate(memory[memory.length - 2])
+            display.textContent = temp;
+            }
+        }
+    }
 }
 
 function evaluate(buttonSelected) {
