@@ -1,6 +1,7 @@
 const operators = ['+', '-', 'x', '/'];
 const equal = ['='];
 const decimal = ['.'];
+const specialOperators = ['sqrt', '+-']
 let memory = [];
 let display = document.getElementById('screen');
 let calculatedNumber = 0;
@@ -26,13 +27,13 @@ function divide(a, b) {
 
 function operate(a, string, b) {
     switch (string) {
-        case '+': case 'addition':
+        case '+':
             return add(a, b);
-        case '-': case 'subtraction':
+        case '-':
             return subtract(a, b);
-        case 'x': case 'multiplication':
+        case 'x':
             return multiply(a, b);
-        case '/': case 'division':
+        case '/':
             return divide(a, b);
     }
 }
@@ -45,7 +46,7 @@ function clearDisplay() {
 }
 
 function truncate(number) {
-    if (number < 1000000000) {        
+    if (Math.abs(number) < 100000000000) {        
         let string = number.toString();
         if (string.length > 11) return +string.slice(0, 11);
         else return string;
@@ -148,6 +149,21 @@ function decimalButton (buttonSelected) {
     }
 }
 
+function specialButton (buttonSelected) {
+    if (buttonSelected === '+-') {
+        if (!operators.includes(memory[memory.length - 1])) {
+            memory[memory.length - 1] *= -1;
+            let temp = truncate(memory[memory.length - 1])
+            display.textContent = temp;
+        }
+        else {
+            memory[memory.length - 2] *= -1;
+            let temp = truncate(memory[memory.length - 2])
+            display.textContent = temp;
+        }
+    }
+}
+
 function evaluate(buttonSelected) {
     if (operators.includes(buttonSelected)) {
         operatorButton(buttonSelected);
@@ -157,6 +173,9 @@ function evaluate(buttonSelected) {
     }
     else if (decimal.includes(buttonSelected)) {
         decimalButton(buttonSelected);
+    }
+    else if (specialOperators.includes(buttonSelected)) {
+        specialButton(buttonSelected);
     }
     else {
         numberButton(buttonSelected)
