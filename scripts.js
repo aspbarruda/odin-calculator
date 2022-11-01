@@ -1,7 +1,7 @@
 const operators = ['+', '-', 'x', '/'];
 const equal = ['='];
 const decimal = ['.'];
-const specialOperators = ['sqrt', '+-']
+const specialOperators = ['sqrt', '+-', '%']
 let memory = [];
 let display = document.getElementById('screen');
 let calculatedNumber = 0;
@@ -43,6 +43,15 @@ function clearDisplay() {
     isDecimal = false;
     memory = [];
     display.textContent = 0;
+}
+
+function undoCharacter() {
+    if (!operators.includes(memory[memory.length - 1]) && !equalSign) {
+        console.log('foo');
+        let temp = memory[memory.length - 1].toString();
+        memory[memory.length - 1] = temp.slice(0, temp.length - 1);
+        display.textContent = truncate(memory[memory.length - 1]);
+    }
 }
 
 function truncate(number) {
@@ -162,9 +171,10 @@ function specialButton (buttonSelected) {
             display.textContent = temp;
         }
     }
-    else {
+    else if (buttonSelected === 'sqrt') {
         if (!operators.includes(memory[memory.length - 1])) {
             memory[memory.length - 1] = Math.sqrt(memory[memory.length - 1]);
+            equalSign = true;
             if (memory[memory.length - 1].toString() == 'NaN') {
                 display.textContent = 'ERROR';
                 memory = [];
@@ -176,6 +186,7 @@ function specialButton (buttonSelected) {
         }
         else {
             memory[memory.length - 2] = Math.sqrt(memory[memory.length - 2]);
+            equalSign = true;
             if (memory[memory.length - 1].toString() == 'NaN') {
                 display.textContent = 'ERROR';
                 memory = [];
@@ -212,6 +223,9 @@ buttons.forEach(button => {
     button.addEventListener('click', (e) => {
         if (e.target.id === 'clear') {
             clearDisplay();
+        }
+        else if (e.target.id === 'undo') {
+            undoCharacter();
         }
         else {
             evaluate(e.target.id);

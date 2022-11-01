@@ -57,12 +57,13 @@ main {
 
 button {
     background-color: white;
-    font-size: 80px;
+    font-size: 50px;
     color: white;
     background-color: darkblue;
     border: none;
     border-radius: 5px;
     min-width: 100px;
+    min-height: 90px;
     margin: 30px 10px 10px;
 }
 
@@ -74,6 +75,6 @@ button {
     background-color: #837E6A;
 }
 
-#clear {
+.clear {
     background-color: #FE3B4B;
 }
