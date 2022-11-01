@@ -95,6 +95,7 @@ function operatorButton (buttonSelected) {
 
 function equalButton () {
     if (operators.includes(memory[memory.length - 1])) {
+        document.getElementById(memory[memory.length - 1]).classList.toggle('operator-active');
         calculatedNumber = operate(+memory[memory.length - 2], memory[memory.length - 1], +memory[memory.length - 2]);
         if (calculatedNumber === NaN || calculatedNumber === Infinity || calculatedNumber === -Infinity || calculatedNumber === undefined) {
             display.textContent = 'ERROR';
@@ -108,6 +109,7 @@ function equalButton () {
         equalSign = true;
     }
     else if (memory.length > 2) {
+        document.getElementById(memory[memory.length - 2]).classList.toggle('operator-active');
         calculatedNumber = operate(+memory[memory.length - 3], memory[memory.length - 2], +memory[memory.length - 1]);
         if (calculatedNumber == NaN || calculatedNumber == Infinity || calculatedNumber == -Infinity || calculatedNumber == undefined) {
             display.textContent = 'ERROR';
@@ -228,6 +230,21 @@ buttons.forEach(button => {
             undoCharacter();
         }
         else {
+            if (operators.includes(e.target.id)) {
+                if (document.getElementById('+').classList[1] === 'operator-active') {
+                    document.getElementById('+').classList.toggle('operator-active');
+                }
+                else if (document.getElementById('-').classList[1] === 'operator-active') {
+                    document.getElementById('-').classList.toggle('operator-active');
+                }
+                else if (document.getElementById('x').classList[1] === 'operator-active') {
+                    document.getElementById('x').classList.toggle('operator-active');
+                }
+                else if (document.getElementById('/').classList[1] === 'operator-active') {
+                    document.getElementById('/').classList.toggle('operator-active');
+                }
+                e.target.classList.toggle('operator-active');
+            }
             evaluate(e.target.id);
         }
     });

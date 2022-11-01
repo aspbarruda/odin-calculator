@@ -71,10 +71,27 @@ button {
     background-color: #292B28;
 }
 
+.numbers:active {
+    background-color: #292b2886;
+}
+
 .operators {
     background-color: #837E6A;
 }
 
 .clear {
     background-color: #FE3B4B;
+}
+
+.clear:active {
+    background-color: #ff9fa7;
+}
+
+#\=:active,
+#sqrt:active {
+    background-color: #474641;
+}
+
+.operator-active {
+    background-color: #474641;
 }
