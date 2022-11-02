@@ -71,8 +71,12 @@ button {
     background-color: #292B28;
 }
 
+.numbers:hover {
+    background-color: #292b289c;
+}
+
 .numbers:active {
-    background-color: #292b2886;
+    background-color: #292b2828;
 }
 
 .operators {
@@ -83,8 +87,16 @@ button {
     background-color: #FE3B4B;
 }
 
+.clear:hover {
+    background-color: #f37883;
+}
+
 .clear:active {
     background-color: #ff9fa7;
+}
+
+.operators:hover {
+    background-color: #646258;
 }
 
 #\=:active,

@@ -1,7 +1,8 @@
 const operators = ['+', '-', 'x', '/'];
 const equal = ['='];
 const decimal = ['.'];
-const specialOperators = ['sqrt', '+-', '%']
+const specialOperators = ['sqrt', '+-', '%'];
+const digits = ['0', '1', '2', '3', '4', '5' , '6', '7', '8', '9'];
 let memory = [];
 let display = document.getElementById('screen');
 let calculatedNumber = 0;
@@ -47,7 +48,6 @@ function clearDisplay() {
 
 function undoCharacter() {
     if (!operators.includes(memory[memory.length - 1]) && !equalSign) {
-        console.log('foo');
         let temp = memory[memory.length - 1].toString();
         memory[memory.length - 1] = temp.slice(0, temp.length - 1);
         display.textContent = truncate(memory[memory.length - 1]);
@@ -249,3 +249,42 @@ buttons.forEach(button => {
         }
     });
 });
+
+
+window.addEventListener('keydown', (e) => {
+    if (digits.includes(e.key) || decimal.includes(e.key) || specialOperators.includes(e.key) || equal.includes(e.key)) {
+        evaluate(e.key);
+    }
+    else if (operators.includes(e.key)) {
+        if (document.getElementById('+').classList[1] === 'operator-active') {
+            document.getElementById('+').classList.toggle('operator-active');
+        }
+        else if (document.getElementById('-').classList[1] === 'operator-active') {
+            document.getElementById('-').classList.toggle('operator-active');
+        }
+        else if (document.getElementById('x').classList[1] === 'operator-active') {
+            document.getElementById('x').classList.toggle('operator-active');
+        }
+        else if (document.getElementById('/').classList[1] === 'operator-active') {
+            document.getElementById('/').classList.toggle('operator-active');
+        }
+        document.getElementById(e.key).classList.toggle('operator-active');
+        evaluate(e.key);
+    }
+    else if (e.key === '*' || e.key === 'X') {
+        document.getElementById('x').classList.toggle('operator-active');
+        evaluate('x');
+    }
+    else if (e.key === 'q' || e.key === 'Q') {
+        evaluate('sqrt');
+    }
+    else if (e.key === 'Backspace') {
+        undoCharacter();
+    }
+    else if (e.key === 'c' || e.key === 'C') {
+        clearDisplay();
+    }
+    else if (e.key === 'm' || e.key === 'M') {
+        evaluate('+-');
+    }
+})
