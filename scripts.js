@@ -293,4 +293,8 @@ window.addEventListener('keydown', (e) => {
     else if (e.key === 'm' || e.key === 'M') {
         evaluate('+-');
     }
+    else if (e.key === 'Enter') {
+        evaluate('=');
+    }
+    console.log(e.key);
 })
