@@ -47,10 +47,16 @@ function clearDisplay() {
 }
 
 function undoCharacter() {
-    if (!operators.includes(memory[memory.length - 1]) && !equalSign) {
+    if ((memory.length === 1 && memory[0] === '') || memory.length === 0) {
+        display.textContent = 0;
+    }
+    else if (!operators.includes(memory[memory.length - 1]) && !equalSign) {
         let temp = memory[memory.length - 1].toString();
         memory[memory.length - 1] = temp.slice(0, temp.length - 1);
         display.textContent = truncate(memory[memory.length - 1]);
+        if (memory.length === 1 && memory[0] === '') {
+            display.textContent = 0;
+        }
     }
 }
 
